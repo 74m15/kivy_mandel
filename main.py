@@ -9,6 +9,7 @@ import kivy
 
 from array import array
 from threading import Thread
+from time import time
 
 from kivy.app import App
 from kivy.clock import Clock
@@ -26,10 +27,8 @@ class MandelApp(App):
             print("Start rendering!")
             
             self.image = self.root.ids["image"]
-            
-            print(self.image.width, self.image.height)
-            
             self.texture = Texture.create(size=self.image.size)
+            self.start_time = time()
             
             size = self.image.size[0] * self.image.size[1] * 3
             buf = [255 for x in range(size)]
@@ -84,7 +83,7 @@ class MandelApp(App):
                 self.array[3 * (x + y * self.image.width) + 2] = abs(255 - iter * 8) % 256
     
         self.rendering = False
-        print("Rendering complete!")
+        print(f"Rendering complete! time spent: {time() - self.start_time:5.3g}")
     
     def on_timer(self, *args, **kwargs):
         self.texture.blit_buffer(self.array, colorfmt='rgb', bufferfmt='ubyte')
