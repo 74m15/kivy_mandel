@@ -1,0 +1,27 @@
+StackLayout:
+    orientation: 'tb-lr'
+    padding: '10px'
+    spacing: '5px'
+    
+    canvas.before:
+        Color:
+            rgb: .6, .6, .6
+        Rectangle:
+            size: self.size
+    
+    Image:
+        id: image
+        size_hint: (None, None)
+        width: 400
+        height: 400
+    GridLayout:
+        rows: 1
+        size_hint: (None, None)
+        Button:
+            size_hint: (None, None)
+            text: 'Start'
+            on_press: app.on_render_start()
+        Button:
+            size_hint: (None, None)
+            text: 'Stop'
+            on_press: app.on_render_stop()
